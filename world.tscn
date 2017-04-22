@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://sprites/fastforward2-active.png" type="Texture" id=9]
 [ext_resource path="res://sprites/pause-inactive.png" type="Texture" id=10]
 [ext_resource path="res://sprites/pause-active.png" type="Texture" id=11]
+[ext_resource path="res://clock.scn" type="PackedScene" id=12]
 
 [node name="world" type="Node2D"]
 
@@ -133,36 +134,41 @@ textures/normal = ExtResource( 10 )
 textures/pressed = ExtResource( 11 )
 script/script = ExtResource( 5 )
 
-[connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
+[node name="clock" parent="." instance=ExtResource( 12 )]
+
+transform/pos = Vector2( 613.465, 23.8291 )
+transform/scale = Vector2( 2, 2 )
 
 [connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
 
 [connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
-
-[connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
+
 [connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
-
-[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
+
 [connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
-[connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
 
 
