@@ -7,6 +7,8 @@ const TIME_FF2    = 4
 
 export var time_scale = TIME_PLAY
 
+signal timescale_changed(x)
+
 var clock
 
 func _ready():
@@ -14,8 +16,7 @@ func _ready():
 
 func set_timescale(x):
 	time_scale = x
-	var anim = clock.get_node('./anim')
-	anim.set_speed(time_scale)
+	emit_signal('timescale_changed', x)
 
 func _on_play_button_toggled(pressed):
 	set_timescale(TIME_PLAY)
