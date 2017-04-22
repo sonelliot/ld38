@@ -1,12 +1,15 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://sprites/fruitling.png" type="Texture" id=1]
+[ext_resource path="res://fruitling.gd" type="Script" id=1]
+[ext_resource path="res://sprites/fruitling.png" type="Texture" id=2]
 
 [node name="fruitling" type="Node2D"]
 
+script/script = ExtResource( 1 )
+growth_time = 20
+
 [node name="sprite" type="Sprite" parent="."]
 
-transform/scale = Vector2( 3, 3 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 
 

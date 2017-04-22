@@ -5,6 +5,7 @@ const GROWTH_SPROUTED = 1
 const GROWTH_MATURE   = 2
 
 export var growth_rate = 1.0
+export var fruit_cost = 150
 
 var growth = 0
 var growth_state = GROWTH_SAPPLING
@@ -22,15 +23,11 @@ func mature_plant():
 		get_node("sprite").set_frame(growth_state)
 
 func mature_fruit():
-	var n = int(growth / 100)
-	while n > 0:
-		for s in slots:
-			if s.get_child_count() == 0:
-				var f = fruitling_scene.instance()
-				s.add_child(f)
-				growth = growth - 100
-				break
-		n = n - 1
+	for s in slots:
+		if s.get_child_count() == 0 and growth > fruit_cost:
+			var f = fruitling_scene.instance()
+			s.add_child(f)
+			growth = growth - fruit_cost
 
 func _ready():
 	for child in get_children():

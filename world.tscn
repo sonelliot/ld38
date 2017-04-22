@@ -21,7 +21,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 113.518, 10 )
+extents = Vector2( 113.518, 11.4158 )
 
 [node name="world" type="Node2D"]
 
@@ -173,7 +173,6 @@ growth_rate = 5.0
 
 [node name="ground" type="StaticBody2D" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( 86.847, 445.514 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
@@ -196,31 +195,31 @@ _update_shape_index = 0
 
 [connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
 
+[connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
+
 [connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
+[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
+[connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
-
-[connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
