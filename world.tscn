@@ -1,14 +1,27 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=12 format=1]
 
-[ext_resource path="res://tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://game.gd" type="Script" id=1]
+[ext_resource path="res://tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://sprites/play-inactive.png" type="Texture" id=3]
+[ext_resource path="res://sprites/play-active.png" type="Texture" id=4]
+[ext_resource path="res://time_button.gd" type="Script" id=5]
+[ext_resource path="res://sprites/fastforward1-inactive.png" type="Texture" id=6]
+[ext_resource path="res://sprites/fastforward1-active.png" type="Texture" id=7]
+[ext_resource path="res://sprites/fastforward2-inactive.png" type="Texture" id=8]
+[ext_resource path="res://sprites/fastforward2-active.png" type="Texture" id=9]
+[ext_resource path="res://sprites/pause-inactive.png" type="Texture" id=10]
+[ext_resource path="res://sprites/pause-active.png" type="Texture" id=11]
 
 [node name="world" type="Node2D"]
+
+script/script = ExtResource( 1 )
+time_scale = 1
 
 [node name="tilemap" type="TileMap" parent="."]
 
 transform/scale = Vector2( 3, 3 )
 mode = 0
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 2 )
 cell/size = Vector2( 16, 16 )
 cell/quadrant_size = 16
 cell/custom_transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -42,5 +55,114 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
+
+[node name="play_button" type="TextureButton" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 56.0
+margin/top = 8.0
+margin/right = 72.0
+margin/bottom = 24.0
+toggle_mode = true
+is_pressed = true
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 3 )
+textures/pressed = ExtResource( 4 )
+script/script = ExtResource( 5 )
+
+[node name="ff1_button" type="TextureButton" parent="."]
+
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 104.0
+margin/top = 9.0
+margin/right = 120.0
+margin/bottom = 25.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 6 )
+textures/pressed = ExtResource( 7 )
+script/script = ExtResource( 5 )
+
+[node name="ff2_button" type="TextureButton" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 155.0
+margin/top = 9.0
+margin/right = -107.0
+margin/bottom = 39.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 8 )
+textures/pressed = ExtResource( 9 )
+script/script = ExtResource( 5 )
+
+[node name="pause_button" type="TextureButton" parent="."]
+
+anchor/right = 1
+anchor/bottom = 1
+rect/scale = Vector2( 2, 2 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 9.0
+margin/top = 8.0
+margin/right = 39.0
+margin/bottom = 40.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 10 )
+textures/pressed = ExtResource( 11 )
+script/script = ExtResource( 5 )
+
+[connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
+
+[connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
+
+[connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
+
+[connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
 
