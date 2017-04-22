@@ -3,6 +3,7 @@ extends KinematicBody2D
 const STATE_IDLE   = 0
 const STATE_EAT    = 1
 const STATE_WANDER = 2
+const STATE_DEATH  = 3
 
 export var idle_timeout = 10
 export var wander_timeout = 5
@@ -10,8 +11,11 @@ export var speed = 5
 export var eat_speed = 1
 export var sight_distance = 30
 export var hunger_rate = 0.5
+export var starve_rate = 1.0
 
 var hunger = 100
+var health = 80
+
 var state = STATE_IDLE
 var facing = Vector2(1, 0)
 var anim
@@ -30,6 +34,9 @@ func is_food(n):
 
 func hungry():
 	return hunger < 80
+
+func starving():
+	return hunger < 20
 
 func look_for_food():
 	for node in get_parent().get_children():
@@ -84,6 +91,12 @@ func state_eat(delta):
 		state = STATE_IDLE
 		timer = 0
 
+func state_death(delta):
+	play_anim('death')
+	
+	if not anim.is_playing():
+		self.queue_free()
+
 func _ready():
 	set_process(true)
 	
@@ -99,9 +112,17 @@ func _process(delta):
 	timer = timer + adj_delta
 	hunger = hunger - (hunger_rate * adj_delta)
 	
+	if starving():
+		health = health - (starve_rate * adj_delta)
+	
+	if health <= 0:
+		state = STATE_DEATH
+	
 	if state == STATE_IDLE:
 		state_idle(adj_delta)
 	elif state == STATE_EAT:
 		state_eat(adj_delta)
 	elif state == STATE_WANDER:
 		state_wander(adj_delta)
+	elif state == STATE_DEATH:
+		state_death(adj_delta)
