@@ -47,7 +47,10 @@
 ** DONE Creatures can die from starvation
 ** TODO Evolution #1 for slime
 ** TODO Evolution #2 for slime
-** TODO Able to grow plants
+** DONE Able to grow plants
+** TODO Creatures poop
+** TODO Creatures sleep
+** TODO Emoticons indicate mood and status 
 ** TODO Add pest creature
 ** TODO Egg can hatch into creature
 ** TODO Creatures can mate

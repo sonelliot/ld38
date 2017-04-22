@@ -195,27 +195,27 @@ _update_shape_index = 0
 
 [connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
 
-[connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
-
 [connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
-
 [connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
-
 [connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
