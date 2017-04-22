@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://sappling.gd" type="Script" id=1]
+[ext_resource path="res://sprites/sappling.png" type="Texture" id=2]
+
+[node name="sappling" type="Node2D"]
+
+script/script = ExtResource( 1 )
+growth_rate = 1.0
+
+[node name="sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+hframes = 3
+
+[node name="slot1" type="Position2D" parent="."]
+
+transform/pos = Vector2( -21.1026, -0.891655 )
+
+[node name="slot2" type="Position2D" parent="."]
+
+transform/pos = Vector2( -5.05276, -32.6942 )
+
+[node name="slot3" type="Position2D" parent="."]
+
+transform/pos = Vector2( 23.4804, 3.26943 )
+
+
