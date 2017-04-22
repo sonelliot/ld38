@@ -1,3 +1,45 @@
 # -*- mode: org; -*-
 
-* TODO Decide on a game idea
+* DONE Decide on a game idea
+
+  The theme is 'A Small World'.
+
+  1. Platformer that takes place in one small level
+  2. Virtual terrarium game
+     
+     Maybe this could be a bit like a tamagotchi game.
+  
+  3. Terraforming or planet-building game
+  4. Shooter on a small planet
+     
+     Projectiles can travel around the planet with circular motion.
+     
+  5. Microscope style adventure game
+     
+     You can shrink down to explore different levels.
+     
+  6. Mario galaxy style platformer
+  7. Being hunted on a small planet or world
+  8. Roguelike that happens on a small, ever-changing world
+  9. Space sim where you can explore small planets
+  10. Point and click adventure game in small world
+  
+  | No. | Content | Difficulty |
+  |-----+---------+------------|
+  | 1   | 6       | 6          |
+  | 2   | 4       | 4          |
+  | 3   | 5       | 9          |
+  | 4   | 6       | 7          |
+  | 5   | 8       | 6          |
+  | 6   | 7       | 7          |
+  | 7   | 5       | 9          |
+  | 8   | 8       | 7          |
+  | 9   | 8       | 9          |
+  | 10  | 8       | 6          |
+
+  No. 2 (Terrarium) looks like the winner. Plus it sounds like a
+  pretty relaxing idea overall.
+
+* Tasks
+
+** TODO Prototype speed settings
