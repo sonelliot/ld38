@@ -42,6 +42,12 @@
 
 * Tasks
 
-** TODO Prototype speed settings
-
-** TODO Add a creature with needs
+** DONE Prototype speed settings
+** TODO Able to feed creatures
+** TODO Creatures can die
+** TODO Evolution #1 for slime
+** TODO Evolution #2 for slime
+** TODO Able to grow plants
+** TODO Add pest creature
+** TODO Egg can hatch into creature
+** TODO Creatures can mate
