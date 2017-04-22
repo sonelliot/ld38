@@ -43,8 +43,8 @@
 * Tasks
 
 ** DONE Prototype speed settings
-** TODO Able to feed creatures
-** TODO Creatures can die
+** DONE Able to feed creatures
+** DONE Creatures can die from starvation
 ** TODO Evolution #1 for slime
 ** TODO Evolution #2 for slime
 ** TODO Able to grow plants
