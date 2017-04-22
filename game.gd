@@ -13,9 +13,14 @@ var clock
 
 func _ready():
 	clock = get_node('./clock')
+	set_timescale(TIME_PLAY)
+
+func get_timescale():
+	return time_scale
 
 func set_timescale(x):
 	time_scale = x
+	Globals.set('timescale', x)
 	emit_signal('timescale_changed', x)
 
 func _on_play_button_toggled(pressed):

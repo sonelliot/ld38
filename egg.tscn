@@ -18,9 +18,12 @@ tracks/0/keys = { "times":FloatArray( 0, 1 ), "transitions":FloatArray( 1, 1 ), 
 [node name="egg" type="Node2D"]
 
 script/script = ExtResource( 1 )
+species = ""
+incubation_period = 60
 
 [node name="sprite" type="Sprite" parent="."]
 
+transform/scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 region = true
 region_rect = Rect2( 16, 0, 16, 16 )

@@ -1,9 +1,10 @@
 extends Node2D
 
 func _ready():
-	var world = get_tree().get_root().get_node('world')
-	world.connect("timescale_changed", self, "_on_timescale_changed")
+	set_process(true)
 
-func _on_timescale_changed(x):
+func _process(delta):
+	var timescale = Globals.get('timescale')
+	
 	var anim = get_node('./anim')
-	anim.set_speed(x)
+	anim.set_speed(timescale)

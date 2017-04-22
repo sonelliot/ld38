@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://food.gd" type="Script" id=1]
+[ext_resource path="res://sprites/apple.png" type="Texture" id=2]
+
+[node name="apple" type="Node2D" groups=[ "food" ]]
+
+script/script = ExtResource( 1 )
+nutrition = 10
+
+[node name="sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+

@@ -1,9 +1,23 @@
 extends Node2D
 
-func _ready():
-	var world = get_tree().get_root().get_node('world')
-	world.connect("timescale_changed", self, "_on_timescale_changed")
+export var species = ''
+export var incubation_period = 60 # sec
 
-func _on_timescale_changed(x):
+var world
+var alive_for = 0
+
+func spawn():
+	pass
+
+func _ready():
+	set_process(true)
+
+func _process(delta):
+	var timescale = Globals.get('timescale')
+	
 	var anim = get_node('./anim')
-	anim.set_speed(x)
+	anim.set_speed(timescale)
+	
+#	alive_for = alive_for + timescale * delta
+#	if alive_for > incubation_period:
+#		print('spawn')

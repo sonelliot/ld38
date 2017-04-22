@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://slime.gd" type="Script" id=1]
+[ext_resource path="res://sprites/slime.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 19.7916, 19.5173 )
+
+[sub_resource type="Animation" id=4]
+
+resource/name = "eat"
+length = 3.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.4, 1, 1.6, 2, 2.4, 2.8 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 2, 3, 4, 5, 6, 7, 8 ] }
+
+[sub_resource type="Animation" id=3]
+
+length = 2.0
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 1 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ 0, 1 ] }
+
+[node name="slime" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+idle_timeout = 10
+wander_timeout = 10
+speed = 5
+eat_speed = 1
+sight_distance = 30
+hunger_rate = 0.5
+
+[node name="sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+hframes = 15
+frame = 1
+
+[node name="shape" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="anim" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/eat = SubResource( 4 )
+anims/idle = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "idle"
+
+
