@@ -53,9 +53,11 @@ func need_to_poo():
 
 func look_for_food():
 	for node in get_parent().get_children():
-		if  is_food(node) and \
+		if  is_food(node) and         \
+			not node.is_locked() and  \
 			get_pos().distance_to(node.get_pos()) < sight_distance:
 			food = node
+			food.lock()
 			return
 
 func near_food():
@@ -136,6 +138,10 @@ func update_mood_icon():
 	elif hunger < 50:
 		moods.show_mood(moods.MOOD_HUNGRY)
 
+func update_flipping():
+	var sprite = get_node("sprite")
+	sprite.set_flip_h(facing.x > 0)
+
 func _ready():
 	set_process(true)
 	
@@ -152,6 +158,7 @@ func _process(delta):
 	hunger = hunger - (hunger_rate * adj_delta)
 	
 	update_mood_icon()
+	update_flipping()
 	
 	if starving():
 		health = health - (starve_rate * adj_delta)

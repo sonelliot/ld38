@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=1]
+[gd_scene load_steps=22 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
@@ -15,14 +15,20 @@
 [ext_resource path="res://clock.scn" type="PackedScene" id=13]
 [ext_resource path="res://egg.tscn" type="PackedScene" id=14]
 [ext_resource path="res://slime.tscn" type="PackedScene" id=15]
-[ext_resource path="res://tree2.tscn" type="PackedScene" id=16]
-[ext_resource path="res://apple.tscn" type="PackedScene" id=17]
-[ext_resource path="res://poop.tscn" type="PackedScene" id=18]
+[ext_resource path="res://bug.tscn" type="PackedScene" id=16]
+[ext_resource path="res://tree2.tscn" type="PackedScene" id=17]
+[ext_resource path="res://apple.tscn" type="PackedScene" id=18]
+[ext_resource path="res://poop.tscn" type="PackedScene" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 113.518, 11.4158 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 94.607 )
 
 [node name="world" type="Node2D"]
 
@@ -175,9 +181,33 @@ transform/pos = Vector2( 545.395, 475.691 )
 transform/pos = Vector2( 316.935, 475.967 )
 sight_distance = 100
 
-[node name="tree2" parent="." instance=ExtResource( 16 )]
+[node name="bug" parent="." instance=ExtResource( 16 )]
+
+transform/pos = Vector2( 50.575, 478.073 )
+
+[node name="tree2" parent="." instance=ExtResource( 17 )]
 
 transform/pos = Vector2( 107.75, 412.292 )
+
+[node name="apple" parent="." instance=ExtResource( 18 )]
+
+transform/pos = Vector2( 324.177, 387.188 )
+
+[node name="apple1" parent="." instance=ExtResource( 18 )]
+
+transform/pos = Vector2( 222.198, 427.814 )
+
+[node name="apple2" parent="." instance=ExtResource( 18 )]
+
+transform/pos = Vector2( 269.457, 391.334 )
+
+[node name="apple3" parent="." instance=ExtResource( 18 )]
+
+transform/pos = Vector2( 390.505, 411.232 )
+
+[node name="poop" parent="." instance=ExtResource( 19 )]
+
+transform/pos = Vector2( 591.975, 377.239 )
 
 [node name="ground" type="StaticBody2D" parent="."]
 
@@ -202,57 +232,108 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="apple" parent="." instance=ExtResource( 17 )]
+[node name="wall_left" type="StaticBody2D" parent="."]
 
-transform/pos = Vector2( 324.177, 387.188 )
+editor/display_folded = true
+transform/pos = Vector2( -19.8983, 465.953 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 3.66448, 0, 0, 3.3208, -16.7659, -172.959 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 
-[node name="apple1" parent="." instance=ExtResource( 17 )]
+[node name="shape" type="CollisionShape2D" parent="wall_left"]
 
-transform/pos = Vector2( 222.198, 427.814 )
+transform/pos = Vector2( -16.7659, -172.959 )
+transform/scale = Vector2( 3.66448, 3.3208 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
-[node name="apple2" parent="." instance=ExtResource( 17 )]
+[node name="wall_right" type="StaticBody2D" parent="."]
 
-transform/pos = Vector2( 269.457, 391.334 )
+editor/display_folded = true
+transform/pos = Vector2( -19.8983, 465.953 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 3.66448, 0, 0, 3.3208, 696.258, -182.079 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 
-[node name="apple3" parent="." instance=ExtResource( 17 )]
+[node name="shape" type="CollisionShape2D" parent="wall_right"]
 
-transform/pos = Vector2( 390.505, 411.232 )
+transform/pos = Vector2( 696.258, -182.079 )
+transform/scale = Vector2( 3.66448, 3.3208 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
-[node name="poop" parent="." instance=ExtResource( 18 )]
+[node name="ceiling" type="StaticBody2D" parent="."]
 
-transform/pos = Vector2( 591.975, 377.239 )
+editor/display_folded = true
+transform/pos = Vector2( 610.16, 639.467 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.969425, 1.58118 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 3.66448, 0, 0, 3.3208, 696.258, -182.079 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 
-[connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
+[node name="shape" type="CollisionShape2D" parent="ceiling"]
 
-[connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
+transform/pos = Vector2( 696.258, -182.079 )
+transform/scale = Vector2( 3.66448, 3.3208 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
 
 [connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
+
 [connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
-
-[connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
+
 [connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
-
 [connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
-[connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="pressed" from="clean_button" to="." method="_on_clean_button_pressed"]
 
