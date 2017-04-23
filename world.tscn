@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
@@ -11,12 +11,13 @@
 [ext_resource path="res://sprites/fastforward2-active.png" type="Texture" id=9]
 [ext_resource path="res://sprites/pause-inactive.png" type="Texture" id=10]
 [ext_resource path="res://sprites/pause-active.png" type="Texture" id=11]
-[ext_resource path="res://clock.scn" type="PackedScene" id=12]
-[ext_resource path="res://egg.tscn" type="PackedScene" id=13]
-[ext_resource path="res://slime.tscn" type="PackedScene" id=14]
-[ext_resource path="res://tree2.tscn" type="PackedScene" id=15]
-[ext_resource path="res://apple.tscn" type="PackedScene" id=16]
-[ext_resource path="res://poop.tscn" type="PackedScene" id=17]
+[ext_resource path="res://sprites/broom-active.png" type="Texture" id=12]
+[ext_resource path="res://clock.scn" type="PackedScene" id=13]
+[ext_resource path="res://egg.tscn" type="PackedScene" id=14]
+[ext_resource path="res://slime.tscn" type="PackedScene" id=15]
+[ext_resource path="res://tree2.tscn" type="PackedScene" id=16]
+[ext_resource path="res://apple.tscn" type="PackedScene" id=17]
+[ext_resource path="res://poop.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -144,21 +145,37 @@ textures/normal = ExtResource( 10 )
 textures/pressed = ExtResource( 11 )
 script/script = ExtResource( 5 )
 
-[node name="clock" parent="." instance=ExtResource( 12 )]
+[node name="clean_button" type="TextureButton" parent="."]
+
+rect/scale = Vector2( 2.5, 2.5 )
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 290.0
+margin/top = 4.0
+margin/right = 309.0
+margin/bottom = 20.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+textures/normal = ExtResource( 12 )
+
+[node name="clock" parent="." instance=ExtResource( 13 )]
 
 transform/pos = Vector2( 608.558, 26.5311 )
 transform/scale = Vector2( 2, 2 )
 
-[node name="egg" parent="." instance=ExtResource( 13 )]
+[node name="egg" parent="." instance=ExtResource( 14 )]
 
 transform/pos = Vector2( 545.395, 475.691 )
 
-[node name="slime" parent="." instance=ExtResource( 14 )]
+[node name="slime" parent="." instance=ExtResource( 15 )]
 
 transform/pos = Vector2( 316.935, 475.967 )
 sight_distance = 100
 
-[node name="tree2" parent="." instance=ExtResource( 15 )]
+[node name="tree2" parent="." instance=ExtResource( 16 )]
 
 transform/pos = Vector2( 107.75, 412.292 )
 
@@ -185,25 +202,27 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="apple" parent="." instance=ExtResource( 16 )]
+[node name="apple" parent="." instance=ExtResource( 17 )]
 
 transform/pos = Vector2( 324.177, 387.188 )
 
-[node name="apple1" parent="." instance=ExtResource( 16 )]
+[node name="apple1" parent="." instance=ExtResource( 17 )]
 
 transform/pos = Vector2( 222.198, 427.814 )
 
-[node name="apple2" parent="." instance=ExtResource( 16 )]
+[node name="apple2" parent="." instance=ExtResource( 17 )]
 
 transform/pos = Vector2( 269.457, 391.334 )
 
-[node name="apple3" parent="." instance=ExtResource( 16 )]
+[node name="apple3" parent="." instance=ExtResource( 17 )]
 
 transform/pos = Vector2( 390.505, 411.232 )
 
-[node name="poop" parent="." instance=ExtResource( 17 )]
+[node name="poop" parent="." instance=ExtResource( 18 )]
 
 transform/pos = Vector2( 591.975, 377.239 )
+
+[connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
 
@@ -211,30 +230,30 @@ transform/pos = Vector2( 591.975, 377.239 )
 
 [connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
 
-[connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
-
-[connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
+
 [connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
-
-[connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
-
-[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
+
 [connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
 
-[connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
+
 [connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
-[connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
+[connection signal="pressed" from="clean_button" to="." method="_on_clean_button_pressed"]
 
 
