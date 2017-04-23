@@ -73,7 +73,7 @@ eat_speed = 2
 sight_distance = 80
 hunger_rate = 1.0
 starve_rate = 1.0
-food_nearness = 10
+food_nearness = 30
 
 [node name="sprite" type="Sprite" parent="."]
 

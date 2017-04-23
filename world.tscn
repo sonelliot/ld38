@@ -16,7 +16,7 @@
 [ext_resource path="res://tree2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://apple.tscn" type="PackedScene" id=15]
 [ext_resource path="res://sappling.tscn" type="PackedScene" id=16]
-[ext_resource path="res://slime.tscn" type="PackedScene" id=17]
+[ext_resource path="res://egg.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -292,41 +292,55 @@ _update_shape_index = 0
 
 transform/pos = Vector2( 312.57, 458.491 )
 
-[node name="slime" parent="." instance=ExtResource( 17 )]
+[node name="egg" parent="." instance=ExtResource( 17 )]
 
-transform/pos = Vector2( 468.44, 277.748 )
+transform/pos = Vector2( 514.041, 329.152 )
+species = "bugtiger"
+incubation_period = 5
 
-[connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
+[node name="egg1" parent="." instance=ExtResource( 17 )]
+
+transform/pos = Vector2( 163.332, 358.999 )
+species = "bug"
+incubation_period = 5
+
+[node name="egg2" parent="." instance=ExtResource( 17 )]
+
+transform/pos = Vector2( 598.609, 406.258 )
+species = "slime"
+incubation_period = 5
+
+[connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
 
 [connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
-
-[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
-
 [connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
-
 [connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
 
+[connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
+
 [connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
-
-[connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
 
 [connection signal="pressed" from="clean_button" to="." method="_on_clean_button_pressed"]
 
