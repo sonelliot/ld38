@@ -48,9 +48,12 @@
 ** TODO Evolution #1 for slime
 ** TODO Evolution #2 for slime
 ** DONE Able to grow plants
-** TODO Creatures poop
+** DONE Creatures poop
 ** TODO Creatures sleep
+** TODO Player can clean-up poop
+** TODO Player can water plants
+** TODO Player can plant seeds
 ** DONE Emoticons indicate mood and status 
-** TODO Add pest creature
+** TODO Add enemy creature
 ** TODO Egg can hatch into creature
 ** TODO Creatures can mate
