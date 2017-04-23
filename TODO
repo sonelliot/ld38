@@ -45,8 +45,6 @@
 ** DONE Prototype speed settings
 ** DONE Able to feed creatures
 ** DONE Creatures can die from starvation
-** TODO Evolution #1 for slime
-** TODO Evolution #2 for slime
 ** DONE Able to grow plants
 ** DONE Creatures poop
 ** TODO Creatures sleep
@@ -54,7 +52,9 @@
 ** TODO Player can water plants
 ** TODO Player can plant seeds
 ** DONE Emoticons indicate mood and status 
-** TODO Add enemy creature
 ** TODO Egg can hatch into creature
 ** TODO Creatures can mate
-** TODO Bug creature animations
+** DONE Bug creature animations
+** DONE Bug tiger creature animations
+** TODO Fat slime animations
+** TODO Creatures can evolve
