@@ -14,13 +14,17 @@ signal timescale_changed(x)
 
 var clock
 var broom_texture
-var mode = MODE_NORMAL
+var mode
 
 onready var clean_button = get_node('./clean_button')
 
+func change_mode(m):
+	mode = m
+	Globals.set('mode', m)
+
 func mode_clean():
 	if Input.is_action_pressed("mode_cancel"):
-		mode = MODE_NORMAL
+		change_mode(MODE_NORMAL)
 		clean_button.show()
 		Input.set_custom_mouse_cursor(null)
 
@@ -28,6 +32,7 @@ func _ready():
 	clock = get_node('./clock')
 	broom_texture = load('res://sprites/broom-cursor.png')
 	broom_texture.set_flags(0)
+	change_mode(MODE_NORMAL)
 	set_timescale(TIME_PLAY)
 	set_process(true)
 
@@ -58,4 +63,4 @@ func _on_ff2_button_toggled( pressed ):
 func _on_clean_button_pressed():
 	Input.set_custom_mouse_cursor(broom_texture, Vector2(24,24))
 	clean_button.hide()
-	mode = MODE_CLEAN
+	change_mode(MODE_CLEAN)
