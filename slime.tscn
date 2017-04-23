@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://slime.gd" type="Script" id=1]
 [ext_resource path="res://sprites/slime.png" type="Texture" id=2]
@@ -44,6 +44,18 @@ tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = { "times":FloatArray( 0, 1 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ 0, 1 ] }
 
+[sub_resource type="Animation" id=5]
+
+resource/name = "poop"
+length = 5.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 15, 16, 17, 18, 17, 18, 17, 18, 16, 15 ] }
+
 [node name="slime" type="KinematicBody2D"]
 
 input/pickable = false
@@ -66,7 +78,8 @@ starve_rate = 1.0
 
 transform/scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
-hframes = 15
+hframes = 19
+frame = 15
 
 [node name="shape" type="CollisionShape2D" parent="."]
 
@@ -82,6 +95,7 @@ root/root = NodePath("..")
 anims/death = SubResource( 2 )
 anims/eat = SubResource( 3 )
 anims/idle = SubResource( 4 )
+anims/poop = SubResource( 5 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

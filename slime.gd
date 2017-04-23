@@ -4,6 +4,7 @@ const STATE_IDLE   = 0
 const STATE_EAT    = 1
 const STATE_WANDER = 2
 const STATE_DEATH  = 3
+const STATE_POOP   = 4
 
 export var idle_timeout = 10
 export var wander_timeout = 5
@@ -14,6 +15,7 @@ export var hunger_rate = 0.5
 export var starve_rate = 1.0
 
 var hunger = 100
+var poop   = 0
 var health = 80
 
 var state = STATE_IDLE
@@ -23,6 +25,7 @@ var timer = 0
 var food
 
 onready var moods = get_node('./moods')
+onready var poop_scene = load('res://poop.tscn')
 
 func play_anim(n):
 	if anim.get_current_animation() != n:
@@ -30,8 +33,13 @@ func play_anim(n):
 
 func eat(n):
 	hunger = max(100, hunger + n)
+	poop   = min(100, poop + n)
 
-func is_food(n):
+func is_food(obj):
+	if not obj.has_meta('food'):
+		return false
+	
+	var n = obj.get_meta('food')
 	return n == 'apple'
 
 func hungry():
@@ -40,9 +48,12 @@ func hungry():
 func starving():
 	return hunger < 20
 
+func need_to_poo():
+	return poop > 10
+
 func look_for_food():
 	for node in get_parent().get_children():
-		if  is_food(node.get_name()) and \
+		if  is_food(node) and \
 			get_pos().distance_to(node.get_pos()) < sight_distance:
 			food = node
 			return
@@ -52,6 +63,10 @@ func near_food():
 
 func state_idle(delta):
 	play_anim("idle")
+	
+	if need_to_poo():
+		state = STATE_POOP
+	
 	if timer > idle_timeout:
 		state = STATE_WANDER
 		timer = 0
@@ -59,6 +74,9 @@ func state_idle(delta):
 
 func state_wander(delta):
 	play_anim("idle")
+	
+	if need_to_poo():
+		state = STATE_POOP
 	
 	if food == null:
 		look_for_food()
@@ -93,6 +111,14 @@ func state_eat(delta):
 	else:
 		state = STATE_IDLE
 		timer = 0
+
+func state_poop(delta):
+	play_anim('poop')
+	yield(anim, 'finished') # wait for animation to end
+	
+	var p = poop_scene.instance()
+	get_parent().add_child(p)
+	p.set_global_pos(get_global_pos())
 
 func state_death(delta):
 	play_anim('death')
@@ -133,6 +159,8 @@ func _process(delta):
 		state_idle(adj_delta)
 	elif state == STATE_EAT:
 		state_eat(adj_delta)
+	elif state == STATE_POOP:
+		state_poop(adj_delta)
 	elif state == STATE_WANDER:
 		state_wander(adj_delta)
 	elif state == STATE_DEATH:
