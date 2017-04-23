@@ -22,6 +22,8 @@ var anim
 var timer = 0
 var food
 
+onready var moods = get_node('./moods')
+
 func play_anim(n):
 	if anim.get_current_animation() != n:
 		anim.play(n)
@@ -66,6 +68,7 @@ func state_wander(delta):
 		facing.x = sign((food.get_pos() - get_pos()).x)
 		
 		if near_food():
+			moods.show_mood_for(moods.MOOD_HAPPY, 8)
 			state = STATE_EAT
 			timer = 0
 		
@@ -97,6 +100,12 @@ func state_death(delta):
 	if not anim.is_playing():
 		self.queue_free()
 
+func update_mood_icon():
+	if health < 50:
+		moods.show_mood(moods.MOOD_SICK)
+	elif hunger < 50:
+		moods.show_mood(moods.MOOD_HUNGRY)
+
 func _ready():
 	set_process(true)
 	
@@ -111,6 +120,8 @@ func _process(delta):
 	
 	timer = timer + adj_delta
 	hunger = hunger - (hunger_rate * adj_delta)
+	
+	update_mood_icon()
 	
 	if starving():
 		health = health - (starve_rate * adj_delta)

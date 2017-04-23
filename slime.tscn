@@ -1,14 +1,15 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://slime.gd" type="Script" id=1]
 [ext_resource path="res://sprites/slime.png" type="Texture" id=2]
+[ext_resource path="res://moods.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 19.7916, 19.5173 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 
 resource/name = "death"
 length = 2.2
@@ -20,7 +21,7 @@ tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = { "times":FloatArray( 0, 0.4, 0.8, 1.2, 1.6, 2 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 9, 10, 11, 12, 13, 14 ] }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 
 resource/name = "eat"
 length = 3.0
@@ -32,7 +33,7 @@ tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = { "times":FloatArray( 0, 0.4, 1, 1.6, 2, 2.4, 2.8 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 2, 3, 4, 5, 6, 7, 8 ] }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 
 length = 2.0
 loop = true
@@ -66,7 +67,6 @@ starve_rate = 1.0
 transform/scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
 hframes = 15
-frame = 14
 
 [node name="shape" type="CollisionShape2D" parent="."]
 
@@ -79,12 +79,16 @@ _update_shape_index = 0
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/death = SubResource( 5 )
-anims/eat = SubResource( 4 )
-anims/idle = SubResource( 3 )
+anims/death = SubResource( 2 )
+anims/eat = SubResource( 3 )
+anims/idle = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
 autoplay = "idle"
+
+[node name="moods" parent="." instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 0.675232, -36.4663 )
 
 

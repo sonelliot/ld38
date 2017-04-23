@@ -12,6 +12,7 @@ fruit_cost = 150
 [node name="sprite" type="Sprite" parent="."]
 
 transform/scale = Vector2( 3, 3 )
+z/z = -1
 texture = ExtResource( 2 )
 hframes = 3
 

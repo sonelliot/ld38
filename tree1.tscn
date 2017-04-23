@@ -4,6 +4,8 @@
 
 [node name="tree1" type="Node2D"]
 
+z/z = -1
+
 [node name="sprite" type="Sprite" parent="."]
 
 transform/scale = Vector2( 3, 3 )
