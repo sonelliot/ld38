@@ -1,37 +1,37 @@
 [gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://critter.gd" type="Script" id=1]
-[ext_resource path="res://sprites/slime.png" type="Texture" id=2]
+[ext_resource path="res://sprites/bugtiger.png" type="Texture" id=2]
 [ext_resource path="res://moods.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 19.7916, 19.5173 )
+extents = Vector2( 35.1704, 30.8075 )
 
 [sub_resource type="Animation" id=2]
 
 resource/name = "death"
-length = 2.2
+length = 3.0
 loop = false
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.4, 0.8, 1.2, 1.6, 2 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 9, 10, 11, 12, 13, 14 ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.5, 1, 1.5, 2, 2.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 8, 9, 10, 11, 12, 13 ] }
 
 [sub_resource type="Animation" id=3]
 
 resource/name = "eat"
-length = 3.0
+length = 4.5
 loop = true
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.4, 1, 1.6, 2, 2.4, 2.8 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 2, 3, 4, 5, 6, 7, 8 ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 2, 3, 4, 5, 6, 5, 6, 5, 6 ] }
 
 [sub_resource type="Animation" id=4]
 
@@ -47,43 +47,44 @@ tracks/0/keys = { "times":FloatArray( 0, 1 ), "transitions":FloatArray( 1, 1 ), 
 [sub_resource type="Animation" id=5]
 
 resource/name = "poop"
-length = 5.0
+length = 5.5
 loop = false
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 15, 16, 17, 18, 17, 18, 17, 18, 16, 15 ] }
+tracks/0/keys = { "times":FloatArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ), "update":1, "values":[ 14, 15, 16, 17, 18, 19, 20, 19, 20, 19, 20 ] }
 
-[node name="slime" type="KinematicBody2D"]
+[node name="bugtiger" type="KinematicBody2D"]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -3.56662, 5.94436 )
 shapes/0/trigger = false
 collision/layers = 1024
 collision/mask = 1025
 collision/margin = 0.08
 script/script = ExtResource( 1 )
 idle_timeout = 10
-wander_timeout = 5
-speed = 5
-eat_speed = 1
-sight_distance = 30
-hunger_rate = 0.5
+wander_timeout = 20
+speed = 8
+eat_speed = 2
+sight_distance = 140
+hunger_rate = 1.0
 starve_rate = 1.0
-food_nearness = 10
+food_nearness = 30
 
 [node name="sprite" type="Sprite" parent="."]
 
 transform/scale = Vector2( 3, 3 )
 texture = ExtResource( 2 )
-hframes = 19
-frame = 15
+hframes = 21
+frame = 20
 
 [node name="shape" type="CollisionShape2D" parent="."]
 
+transform/pos = Vector2( -3.56662, 5.94436 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -104,6 +105,6 @@ autoplay = "idle"
 
 [node name="moods" parent="." instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 0.675232, -36.4663 )
+transform/pos = Vector2( 1.56686, -55.191 )
 
 

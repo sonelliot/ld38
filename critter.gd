@@ -13,6 +13,7 @@ export var eat_speed = 1
 export var sight_distance = 30
 export var hunger_rate = 0.5
 export var starve_rate = 1.0
+export var food_nearness = 10
 
 var hunger = 100
 var poop   = 0
@@ -52,16 +53,29 @@ func need_to_poo():
 	return poop > 30
 
 func look_for_food():
+	var foods = []
+	
 	for node in get_parent().get_children():
 		if  is_food(node) and         \
 			not node.is_locked() and  \
 			get_pos().distance_to(node.get_pos()) < sight_distance:
-			food = node
-			food.lock()
-			return
+			foods.append(node)
+	
+	if foods.empty():
+		return
+	
+	var nearest = foods[0]
+	for target in foods:
+		var d1 = get_pos().distance_squared_to(nearest.get_pos())
+		var d2 = get_pos().distance_squared_to(target.get_pos())
+		if d2 < d1:
+			nearest = target
+	
+	food = nearest
+	food.lock()
 
 func near_food():
-	return get_pos().distance_to(food.get_pos()) < 10
+	return get_pos().distance_to(food.get_pos()) < food_nearness
 
 func state_idle(delta):
 	play_anim("idle")
@@ -72,7 +86,12 @@ func state_idle(delta):
 	if timer > idle_timeout:
 		state = STATE_WANDER
 		timer = 0
-		facing.x = facing.x * -1 if randf() < 0.5 else 1
+		
+		# when switching to wander we pick a random facing direction if there
+		# isn't any food nearby
+		look_for_food()
+		if food == null:
+			facing.x = facing.x * -1 if randf() < 0.5 else 1
 
 func state_wander(delta):
 	play_anim("idle")
@@ -109,7 +128,6 @@ func state_eat(delta):
 		if food.eaten():
 			food.queue_free()
 			food = null
-		
 	else:
 		state = STATE_IDLE
 		timer = 0
