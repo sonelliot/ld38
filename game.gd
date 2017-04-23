@@ -50,15 +50,19 @@ func set_timescale(x):
 
 func _on_play_button_toggled(pressed):
 	set_timescale(TIME_PLAY)
+	get_tree().set_pause(false)
 
 func _on_pause_button_toggled( pressed ):
 	set_timescale(TIME_PAUSE)
+	get_tree().set_pause(true)
 
 func _on_ff1_button_toggled( pressed ):
 	set_timescale(TIME_FF1)
+	get_tree().set_pause(false)
 
 func _on_ff2_button_toggled( pressed ):
 	set_timescale(TIME_FF2)
+	get_tree().set_pause(false)
 
 func _on_clean_button_pressed():
 	Input.set_custom_mouse_cursor(broom_texture, Vector2(24,24))

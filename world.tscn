@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=1]
+[gd_scene load_steps=20 format=1]
 
 [ext_resource path="res://game.gd" type="Script" id=1]
 [ext_resource path="res://tileset.tres" type="TileSet" id=2]
@@ -13,11 +13,10 @@
 [ext_resource path="res://sprites/pause-active.png" type="Texture" id=11]
 [ext_resource path="res://sprites/broom-active.png" type="Texture" id=12]
 [ext_resource path="res://clock.scn" type="PackedScene" id=13]
-[ext_resource path="res://egg.tscn" type="PackedScene" id=14]
-[ext_resource path="res://tree2.tscn" type="PackedScene" id=15]
-[ext_resource path="res://apple.tscn" type="PackedScene" id=16]
-[ext_resource path="res://sappling.tscn" type="PackedScene" id=17]
-[ext_resource path="res://bug.tscn" type="PackedScene" id=18]
+[ext_resource path="res://tree2.tscn" type="PackedScene" id=14]
+[ext_resource path="res://apple.tscn" type="PackedScene" id=15]
+[ext_resource path="res://sappling.tscn" type="PackedScene" id=16]
+[ext_resource path="res://slime.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -75,6 +74,7 @@ drag_margin/bottom = 0.2
 
 [node name="play_button" type="TextureButton" parent="."]
 
+process/pause_mode = 2
 rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -94,6 +94,7 @@ script/script = ExtResource( 5 )
 
 [node name="ff1_button" type="TextureButton" parent="."]
 
+process/pause_mode = 2
 rect/scale = Vector2( 2, 2 )
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -112,6 +113,7 @@ script/script = ExtResource( 5 )
 
 [node name="ff2_button" type="TextureButton" parent="."]
 
+process/pause_mode = 2
 anchor/right = 1
 anchor/bottom = 1
 rect/scale = Vector2( 2, 2 )
@@ -132,6 +134,7 @@ script/script = ExtResource( 5 )
 
 [node name="pause_button" type="TextureButton" parent="."]
 
+process/pause_mode = 2
 anchor/right = 1
 anchor/bottom = 1
 rect/scale = Vector2( 2, 2 )
@@ -171,27 +174,23 @@ textures/normal = ExtResource( 12 )
 transform/pos = Vector2( 608.558, 26.5311 )
 transform/scale = Vector2( 2, 2 )
 
-[node name="egg" parent="." instance=ExtResource( 14 )]
-
-transform/pos = Vector2( 545.395, 475.691 )
-
-[node name="tree2" parent="." instance=ExtResource( 15 )]
+[node name="tree2" parent="." instance=ExtResource( 14 )]
 
 transform/pos = Vector2( 107.75, 412.292 )
 
-[node name="apple" parent="." instance=ExtResource( 16 )]
+[node name="apple" parent="." instance=ExtResource( 15 )]
 
 transform/pos = Vector2( 324.177, 387.188 )
 
-[node name="apple1" parent="." instance=ExtResource( 16 )]
+[node name="apple1" parent="." instance=ExtResource( 15 )]
 
 transform/pos = Vector2( 222.198, 427.814 )
 
-[node name="apple2" parent="." instance=ExtResource( 16 )]
+[node name="apple2" parent="." instance=ExtResource( 15 )]
 
 transform/pos = Vector2( 269.457, 391.334 )
 
-[node name="apple3" parent="." instance=ExtResource( 16 )]
+[node name="apple3" parent="." instance=ExtResource( 15 )]
 
 transform/pos = Vector2( 390.505, 411.232 )
 
@@ -289,46 +288,45 @@ shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
-[node name="sappling" parent="." instance=ExtResource( 17 )]
+[node name="sappling" parent="." instance=ExtResource( 16 )]
 
 transform/pos = Vector2( 312.57, 458.491 )
 
-[node name="bug" parent="." instance=ExtResource( 18 )]
+[node name="slime" parent="." instance=ExtResource( 17 )]
 
-transform/pos = Vector2( 170.794, 475.073 )
-food_nearness = 10
-
-[connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
+transform/pos = Vector2( 468.44, 277.748 )
 
 [connection signal="toggled" from="play_button" to="pause_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="play_button" to="ff2_button" method="_on_other_button_toggled"]
+
 [connection signal="toggled" from="play_button" to="." method="_on_play_button_toggled"]
 
-[connection signal="toggled" from="play_button" to="ff1_button" method="_on_other_button_toggled"]
+[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff1_button" to="ff2_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff1_button" to="pause_button" method="_on_other_button_toggled"]
-
 [connection signal="toggled" from="ff1_button" to="." method="_on_ff1_button_toggled"]
-
-[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="pause_button" method="_on_other_button_toggled"]
 
-[connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
+[connection signal="toggled" from="ff2_button" to="play_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="ff2_button" to="ff1_button" method="_on_other_button_toggled"]
 
+[connection signal="toggled" from="ff2_button" to="." method="_on_ff2_button_toggled"]
+
 [connection signal="toggled" from="pause_button" to="play_button" method="_on_other_button_toggled"]
+
+[connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="ff2_button" method="_on_other_button_toggled"]
 
 [connection signal="toggled" from="pause_button" to="." method="_on_pause_button_toggled"]
-
-[connection signal="toggled" from="pause_button" to="ff1_button" method="_on_other_button_toggled"]
 
 [connection signal="pressed" from="clean_button" to="." method="_on_clean_button_pressed"]
 
