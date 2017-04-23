@@ -49,7 +49,7 @@ func starving():
 	return hunger < 20
 
 func need_to_poo():
-	return poop > 10
+	return poop > 30
 
 func look_for_food():
 	for node in get_parent().get_children():
@@ -114,11 +114,15 @@ func state_eat(delta):
 
 func state_poop(delta):
 	play_anim('poop')
-	yield(anim, 'finished') # wait for animation to end
 	
-	var p = poop_scene.instance()
-	get_parent().add_child(p)
-	p.set_global_pos(get_global_pos())
+	if not anim.is_playing():
+		var p = poop_scene.instance()
+		get_parent().add_child(p)
+		p.set_global_pos(get_global_pos())
+		p.apply_impulse(Vector2(0,0), Vector2(sign(randf() * 2 - 1), 0) * 60)
+		
+		state = STATE_IDLE
+		poop = 0
 
 func state_death(delta):
 	play_anim('death')
